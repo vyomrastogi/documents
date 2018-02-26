@@ -11,6 +11,7 @@ http://docs.pivotal.io/pivotalcf/1-11/cf-cli/install-go-cli.html
 *For switching between space and organization*
 
 `cf target -s _space-name_`
+
 `cf target -o _organization-name_`
 
 *If facing SSL error*
@@ -30,22 +31,25 @@ http://docs.pivotal.io/pivotalcf/1-11/cf-cli/install-go-cli.html
 
 OR 
 
-cf push {app name} -p {jar file or war file} --random-route --no-start =m {memory allocation} -i{number of instances} 
+`cf push {app name} -p {jar file or war file} --random-route --no-start =m {memory allocation} -i{number of instances} `
 
 
 *For starting application*  
-cf start {app name}
+
+`cf start {app name}`
 
 For vieweing important event for app 
 --} app manager --}org space --} application --}Events 
 
 *On cf CLI* 
-cf events {app=name} 
+`cf events {app=name} `
 
 *For Tailing logs* 
-cf logs {app name} --recent (recent for most recent logs )
+
+`cf logs {app name} --recent (recent for most recent logs )`
 
 ### For getting all detailed configuration of apps deployed in cf space and org 
+
 1. Target the space and org
 2. cf curl "v2/apps"
 3. cf curl "v2/apps/{app metadata.guid}/stats [For detailed stats of the app]
@@ -60,14 +64,19 @@ cf scale {appname } -m{memory allocation} -i{ integer - number of instances }
 
 
 *For creating new service from Marketplace*
+
+```
 cf marketplace
 cf create-service {marketplace place service name} {plan} {user service name}  
 cf bind-service {appaname} {user service name}
 cf restart {appname}
+```
 
 *Converting the app into user provided service*
-cf create-user-provided-service {service name/app name} -p {uri}
-*uri is the uri for the app restarted in previous step. 
+
+`cf create-user-provided-service {service name/app name} -p {uri}`
+
+_uri is the uri for the app restarted in previous step_ 
 
 ``Manifest can be used to define the bound services, memory, instances, package path location etc 
 For creating a manifest from cf cli
@@ -86,13 +95,13 @@ cf routes
 
 *Push the app with different name and different subdomain*
 
-cf push {name v2} -p {package path} -m{memory} -n{subdomain different than current prod} --no-start
+`cf push {name v2} -p {package path} -m{memory} -n{subdomain different than current prod} --no-start`
 bind to required services
 
-cf map-route {name v2} {domain} -n {subdomain prod one}
+`cf map-route {name v2} {domain} -n {subdomain prod one}`
 
 For removing old version 
-cf unmap-route {name v1} {domaine} -n {subdomain}
+`cf unmap-route {name v1} {domaine} -n {subdomain}`
 
 ```
 Metrics : http://docs.pivotal.io/pcf-metrics/1-3/using.html```
